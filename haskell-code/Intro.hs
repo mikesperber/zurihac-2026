@@ -64,6 +64,10 @@ type Weight = Integer -- type alias
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
   deriving Show
+
+data Parrot = ...
+
+data Animal = AnimalDillo Dillo | AnimalParrot Parrot
 -}
 
 -- Dillo: type
