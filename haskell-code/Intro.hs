@@ -226,3 +226,12 @@ data Car = MkCar {
     seats :: Seats, -- between 1 and 8
     licensePlate :: LicensePlate -- at least 2 characters
 }
+
+makeCar :: Integer -> String -> Optional Car
+makeCar n s =
+    case makeSeats n of
+       Null -> Null
+       Result seats ->
+        case makeLicensePlate s of
+            Null -> Null
+            Result licensePlate -> Result (MkCar seats licensePlate)
