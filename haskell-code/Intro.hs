@@ -54,13 +54,32 @@ isCute Snake = False
 -- record:
 
 data Liveness = Dead | Alive
+  deriving Show
 
 type Weight = Integer -- type alias
 
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
+  deriving Show
 
+-- Dillo: type
 -- MkDillo: constructor
+-- dilloLiveness: selector
 
 dillo1 :: Dillo
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 5}
+
+dillo2 :: Dillo
+dillo2 = MkDillo Dead 8
+
+-- >>> dillo2
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 8}
+
+-- >>> dilloLiveness dillo1
+-- Alive
+
+-- >>> dilloWeight dillo1
+-- 5
+
+-- >>> :type dilloLiveness
+-- dilloLiveness :: Dillo -> Liveness
