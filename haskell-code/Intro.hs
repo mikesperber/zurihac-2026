@@ -171,6 +171,7 @@ listIndex element (x:xs) =
            Result index -> Result (index+1)
 
 -- type class: think interface
+-- implementation: instance
 -- >>> :info Eq
 -- type Eq :: * -> Constraint
 -- class Eq a where
