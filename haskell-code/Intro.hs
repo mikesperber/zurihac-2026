@@ -205,7 +205,7 @@ listIndex element (x:xs) =
 -- class Show a where
 --   show :: a -> String
 
-data Seats = MkSeats Integer
+newtype Seats = MkSeats Integer
 
 makeSeats :: Integer -> Optional Seats
 makeSeats n =
@@ -213,7 +213,7 @@ makeSeats n =
     then Result (MkSeats n)
     else Null
 
-data LicensePlate = MkLicensePlate String
+newtype LicensePlate = MkLicensePlate String
 
 makeLicensePlate :: String -> Optional LicensePlate
 makeLicensePlate s =
