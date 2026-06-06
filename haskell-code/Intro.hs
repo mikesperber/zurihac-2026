@@ -237,8 +237,8 @@ makeCar n s =
             Null -> Null
             Result licensePlate -> Result (MkCar seats licensePlate)
 
-fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
-fmap2 f opta optb = 
+fmap2 :: (a -> (b -> c)) -> Optional a -> Optional b -> Optional c
+fmap2 f opta optb = pure f <*> opta <*> optb
 
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
