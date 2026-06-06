@@ -108,3 +108,4 @@ runOverDillo :: Animal -> Animal
 -- runOverDillo (MkDillo {dilloWeight = w}) =
 -- MkDillo Dead w
 runOverDillo (MkDillo _ weight) = MkDillo Dead weight
+runOverDillo (MkParrot sentence weight) = MkParrot "" weight
