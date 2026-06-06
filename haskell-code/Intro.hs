@@ -227,6 +227,7 @@ data Car = MkCar {
     licensePlate :: LicensePlate -- at least 2 characters
 }
 
+
 makeCar :: Integer -> String -> Optional Car
 makeCar n s =
     case makeSeats n of
@@ -235,6 +236,9 @@ makeCar n s =
         case makeLicensePlate s of
             Null -> Null
             Result licensePlate -> Result (MkCar seats licensePlate)
+
+fmap2 :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
+fmap2 f opta optb = 
 
 -- >>> :info Applicative
 -- type Applicative :: (* -> *) -> Constraint
