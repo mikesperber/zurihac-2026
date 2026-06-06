@@ -148,8 +148,13 @@ listMap f (x:xs) = (f x) : (listMap f xs)
 data Optional a =
     Null
   | Result a
+  deriving Show
 
-listIndex :: a -> [a] -> Optional Integer
+-- Eq a: constraint
+listIndex :: Eq a => a -> [a] -> Optional Integer
+
+-- >>> listIndex 3 [0, 4, 3, 2, 5]
+-- Result 2
 listIndex element [] = Null
 listIndex element (x:xs) =
     if element == x
