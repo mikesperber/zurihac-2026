@@ -218,7 +218,7 @@ newtype LicensePlate = MkLicensePlate String
 makeLicensePlate :: String -> Optional LicensePlate
 makeLicensePlate s =
     if length s >= 2
-    then Result (MkLicensePlate s)
+    then pure (MkLicensePlate s)
     else Null
     
 -- Validation
