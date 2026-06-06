@@ -229,6 +229,8 @@ data Car = MkCar {
 
 
 makeCar :: Integer -> String -> Optional Car
+makeCar n s = MkCar <$> makeSeats n <*> makeLicensePlate s
+{-
 makeCar n s =
     case makeSeats n of
        Null -> Null
@@ -236,7 +238,7 @@ makeCar n s =
         case makeLicensePlate s of
             Null -> Null
             Result licensePlate -> Result (MkCar seats licensePlate)
-
+-}
 -- (<$>) = fmap
 
 fmap2 :: (a -> (b -> c)) -> Optional a -> Optional b -> Optional c
