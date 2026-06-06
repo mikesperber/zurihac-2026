@@ -235,3 +235,17 @@ makeCar n s =
         case makeLicensePlate s of
             Null -> Null
             Result licensePlate -> Result (MkCar seats licensePlate)
+
+-- >>> :info Applicative
+-- type Applicative :: (* -> *) -> Constraint
+-- class Functor f => Applicative f where
+--   pure :: a -> f a
+--   (<*>) :: f (a -> b) -> f a -> f b
+
+instance Applicative Optional where
+    pure a = Result a
+    -- (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+    (<*>) Null Null = Null
+    (<*>) Null (Result a) = Null
+    (<*>) (Result f) Null = Null
+    (<*>) (Result f) (Result a) = Result (f a)
