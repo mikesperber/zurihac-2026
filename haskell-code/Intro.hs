@@ -20,14 +20,17 @@ data Pet =
     Dog 
   | Cat 
   | Snake
+  deriving Eq
 
+{-
 instance Eq Pet where
     -- (==) :: Pet -> Pet -> Bool
     (==) Dog Dog = True
     (==) Cat Cat = True
     (==) Snake Snake = True
     (==) _ _ = False
- 
+-}
+
 -- Is a pet cute?
 isCute :: Pet -> Bool
 
