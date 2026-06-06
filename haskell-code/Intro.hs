@@ -155,6 +155,9 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result a) = Result (f a)
 data Optional a =
     Null
   | Result a
@@ -183,3 +186,8 @@ listIndex element (x:xs) =
 -- type Eq :: * -> Constraint
 -- class Eq a where
 --   (==) :: a -> a -> Bool
+
+-- >>> :info Show
+-- type Show :: * -> Constraint
+-- class Show a where
+--   show :: a -> String
