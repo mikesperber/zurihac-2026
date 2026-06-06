@@ -45,7 +45,9 @@ isCute Dog = True
 isCute Cat = True
 isCute Snake = False
 
--- Animals on the Texas highway:
+-- Animal on the Texas highway:
+-- - armadillo OR
+-- - parrot
 
 -- Armadillo has following attributes:
 -- - dead or alive   AND
@@ -58,18 +60,28 @@ data Liveness = Dead | Alive
 
 type Weight = Integer -- type alias
 
+{-
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
   deriving Show
+-}
 
 -- Dillo: type
 -- MkDillo: constructor
 -- dilloLiveness: selector
 
-dillo1 :: Dillo
+-- algebraic data type
+data Animal =
+    MkDillo { dilloLiveness :: Liveness,
+              dilloWeight :: Weight }
+  | MkParrot String Weight 
+  deriving (Show)
+
+
+dillo1 :: Animal
 dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 5}
 
-dillo2 :: Dillo
+dillo2 :: Animal
 dillo2 = MkDillo Dead 8
 
 -- >>> dillo2
@@ -84,7 +96,7 @@ dillo2 = MkDillo Dead 8
 -- >>> :type dilloLiveness
 -- dilloLiveness :: Dillo -> Liveness
 
-runOverDillo :: Dillo -> Dillo
+runOverDillo :: Animal -> Animal
 -- >>> runOverDillo dillo1
 -- MkDillo {dilloLiveness = Dead, dilloWeight = 5}
 -- runOverDillo dillo =
