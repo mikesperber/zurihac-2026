@@ -155,6 +155,13 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 
 -- >>> listIndex 3 [0, 4, 3, 2, 5]
 -- Result 2
+
+-- >>> listIndex Snake [Dog, Cat, Snake, Cat]
+-- No instance for `Eq Pet' arising from a use of `listIndex'
+-- In the expression: listIndex Snake [Dog, Cat, Snake, Cat]
+-- In an equation for `it_a5ObL':
+--     it_a5ObL = listIndex Snake [Dog, Cat, Snake, Cat]
+
 listIndex element [] = Null
 listIndex element (x:xs) =
     if element == x
@@ -162,3 +169,9 @@ listIndex element (x:xs) =
     else case listIndex element xs of
            Null -> Null
            Result index -> Result (index+1)
+
+-- type class: think interface
+-- >>> :info Eq
+-- type Eq :: * -> Constraint
+-- class Eq a where
+--   (==) :: a -> a -> Bool
