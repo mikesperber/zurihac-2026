@@ -59,3 +59,8 @@ type Weight = Integer -- type alias
 
 data Dillo = MkDillo { dilloLiveness :: Liveness,
                        dilloWeight :: Weight }
+
+-- MkDillo: constructor
+
+dillo1 :: Dillo
+dillo1 = MkDillo { dilloLiveness = Alive, dilloWeight = 5}
