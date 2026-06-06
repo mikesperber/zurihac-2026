@@ -155,9 +155,18 @@ listMap :: (a -> b) -> [a] -> [b]
 listMap f [] = []
 listMap f (x:xs) = (f x) : (listMap f xs)
 
+-- >>> :info Functor
+-- type Functor :: (* -> *) -> Constraint
+-- class Functor f where
+--   fmap :: (a -> b) -> f a -> f b
+
+instance Functor Optional where
+    fmap = optionalMap
+
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result a) = Result (f a)
+
 data Optional a =
     Null
   | Result a
@@ -172,14 +181,18 @@ listIndex :: Eq a => a -> [a] -> Optional Integer
 -- >>> listIndex Snake [Dog, Cat, Snake, Cat]
 -- Result 2
 
+inc index = index + 1
+
 listIndex element [] = Null
 listIndex element (x:xs) =
     if element == x
     then Result 0
-    else case listIndex element xs of
+    else fmap inc (listIndex element xs)
+        
+        {- case listIndex element xs of
            Null -> Null
            Result index -> Result (index+1)
-
+        -}
 -- type class: think interface
 -- implementation: instance
 -- >>> :info Eq
@@ -191,3 +204,25 @@ listIndex element (x:xs) =
 -- type Show :: * -> Constraint
 -- class Show a where
 --   show :: a -> String
+
+data Seats = MkSeats Integer
+
+makeSeats :: Integer -> Optional Seats
+makeSeats n =
+    if n >= 1 && n <= 8
+    then Result (MkSeats n)
+    else Null
+
+data LicensePlate = MkLicensePlate String
+
+makeLicensePlate :: String -> Optional LicensePlate
+makeLicensePlate s =
+    if length s >= 2
+    then Result (MkLicensePlate s)
+    else Null
+    
+-- Validation
+data Car = MkCar {
+    seats :: Seats, -- between 1 and 8
+    licensePlate :: LicensePlate -- at least 2 characters
+}
