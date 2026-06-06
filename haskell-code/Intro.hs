@@ -113,3 +113,47 @@ runOverDillo :: Animal -> Animal
 -- MkDillo Dead w
 runOverDillo (MkDillo _ weight) = MkDillo Dead weight
 runOverDillo (MkParrot sentence weight) = MkParrot "" weight
+
+-- curried functions
+f :: Integer -> Integer -> Integer
+
+-- >>> f 2 5
+-- 7
+f x y = x + y
+
+-- List is one of the following
+-- - the empty list  OR                                     []
+-- - a cons list consisting of first element AND rest list   :  (infix)
+--                                                    ^^^^ self-reference
+
+-- 1element list: 5
+list1 :: [Integer]
+list1 = 5 : []
+
+-- 2element list: 8 5
+list2 = 8 : 5 : []
+
+-- 3element list: 3 8 5
+list3 = 3 : list2 --  8 : 5 : []
+list3' = [3,8,5]
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+listSum (first:rest) = first + listSum rest
+
+listMap :: (a -> b) -> [a] -> [b]
+listMap f [] = []
+listMap f (x:xs) = (f x) : (listMap f xs)
+
+data Optional a =
+    Null
+  | Result a
+
+listIndex :: a -> [a] -> Optional Integer
+listIndex element [] = Null
+listIndex element (x:xs) =
+    if element == x
+    then Result 0
+    else case listIndex element xs of
+           Null -> Null
+           Result index -> Result (index+1)
