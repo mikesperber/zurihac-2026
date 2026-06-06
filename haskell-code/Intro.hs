@@ -83,3 +83,9 @@ dillo2 = MkDillo Dead 8
 
 -- >>> :type dilloLiveness
 -- dilloLiveness :: Dillo -> Liveness
+
+runOverDillo :: Dillo -> Dillo
+-- >>> runOverDillo dillo1
+-- MkDillo {dilloLiveness = Dead, dilloWeight = 5}
+runOverDillo dillo =
+    MkDillo { dilloLiveness = Dead, dilloWeight = dilloWeight dillo }
